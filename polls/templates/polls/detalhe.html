@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "pt">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{linguagem.nome}}</title>
+        <style>
+            body{background: #0a0a1a;color: white;font-family: Arial, sans-serif;padding: 20px;}
+            .container {max-width: 800px;margin: 0 auto;}
+            h1 {color: #00d4ff; font-size:2em;margin-bottom: 20px;}
+            .secao {background: #1a1a2e;border-radius: 12px;padding: 20px;margin-bottom: 20px;}
+            .secao h2 {color:#ffd43b;margin-bottom:10px}
+            .btn {display: inline-block;background: #00d4ff;color: #0a0a1a;padding: 12px 30px; border-radius: 8px;text-decoration: none;font-weight: bold;margin-top: 20px;}
+            .back {color: #aaa;text-decoration: none;display: block;margin-bottom: 20px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/polls/"class="back"> Voltar </a>
+        <h1>{{linguagem.nome}}</h1>
+    </div class="secao">
+    <h2>O que e ?</h2>
+    <p>{{linguagem.introducao}}</p>
+    </div>
+    <div class="secao">
+        <h2>Potencias</h2>
+        <p>{{linguagem.potencias}}</p>
+    </div>
+    <div class="secao">
+        <h2>Impactos na tua localidade</h2>
+        <p>{{linguagem.impactos}}</p>
+    </div>
+    <a href="/polls/{{linguagem.id}}/quiz/"class="btn">Fazer o Quiz!</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - {{ linguagem.nome }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0d0d1a; font-family: Arial, sans-serif; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 500px; margin: 60px auto; }
+        .emoji { font-size: 5em; margin-bottom: 20px; }
+        h1 { color: #a855f7; font-size: 1.8em; margin-bottom: 10px; }
+        .pontuacao { font-size: 3em; font-weight: bold; color: #00d4ff; margin: 20px 0; }
+        .mensagem { color: #aaa; font-size: 1em; margin-bottom: 30px; line-height: 1.6; }
+        .btn { display: inline-block; background: #a855f7; color: white; padding: 14px 30px; border-radius: 12px; text-decoration: none; font-size: 1em; margin: 8px; }
+        .btn-outline { background: transparent; border: 2px solid #a855f7; color: #a855f7; }
+        .creditos { color: #555; font-size: 0.75em; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if acertos == total %}
+            <div class="emoji">🏆</div>
+            <h1>Perfeito!</h1>
+            <p class="mensagem">Acertaste todas as perguntas! Es um genio da {{ linguagem.nome }}!</p>
+        {% elif acertos >= total|divisibleby:2 %}
+            <div class="emoji">⭐</div>
+            <h1>Muito Bom!</h1>
+            <p class="mensagem">Boa pontuacao! Continua a praticar e vais chegar ao topo!</p>
+        {% else %}
+            <div class="emoji">💪</div>
+            <h1>Continue Tentando!</h1>
+            <p class="mensagem">Nao desistas! Volta a ler o conteudo e tenta de novo!</p>
+        {% endif %}
+
+        <div class="pontuacao">{{ acertos }}/{{ total }}</div>
+
+        <a href="/polls/{{ linguagem.id }}/quiz/" class="btn btn-outline">Tentar Novamente</a>
+        <a href="/polls/" class="btn">Escolher outra Linguagem</a>
+
+        <div class="creditos">Desenvolvido por @Клодетт</div>
+    </div>
+</body>
+</html>

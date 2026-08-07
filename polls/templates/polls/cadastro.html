@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Tech - Cadastro</title>
+    <style>
+        :root {
+            --bg-body: #0d0d1a;
+            --bg-card: #15152b;
+            --border-input: #363663;
+            --text-main: #ffffff;
+            --text-muted: #8c8ca3;
+            --input-bg: #0d0d1a;
+            --coral-main: #ff4d6d;
+            --coral-hover: #ff758f;
+            --coral-active: #c9184a;
+            --focus-cyan: #00a8e8;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-body: #f0f2f9;
+            --bg-card: #ffffff;
+            --border-input: #cbd5e1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --input-bg: #f8fafc;
+            --coral-main: #e03152; 
+            --coral-hover: #ff4d6d;
+            --coral-active: #b91c1c;
+            --focus-cyan: #0284c7;
+            --shadow-color: rgba(15, 23, 42, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-toggle-wrapper {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .theme-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-input);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            transition: all 0.2s ease;
+        }
+
+        .cadastro-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-input);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-align: center;
+            margin: 0 0 30px 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .form-group input, 
+        .form-group select {
+            background-color: var(--input-bg);
+            border: 2px solid var(--border-input);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c8ca3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: var(--focus-cyan);
+            box-shadow: 0 0 0 4px rgba(0, 168, 232, 0.15);
+        }
+
+        .form-group select option {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .btn-cadastrar {
+            background-color: var(--coral-main);
+            color: var(--bg-body);
+            border: none;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+        }
+
+        [data-theme="light"] .btn-cadastrar {
+            color: #ffffff;
+        }
+
+        .btn-cadastrar:hover {
+            background-color: var(--coral-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-cadastrar:active {
+            background-color: var(--coral-active);
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle-wrapper">
+        <button class="theme-btn" id="themeToggleBtn" aria-label="Alternar tema visual">
+            🌓 Alterar Tema
+        </button>
+    </div>
+
+    <!-- Container do Card de Cadastro (Rota 2) -->
+    <div class="cadastro-container">
+        
+        <!-- ESTADO 1: FORMULÁRIO ATIVO -->
+        <div id="cadastroState">
+            <h2>Cria a tua conta</h2>
+            <p class="subtitle">É rápido e gratuito</p>
+
+            <form id="cadastroForm">
+                <div class="form-group">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" min="10" max="17" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="provincia">Província</label>
+                    <select id="provincia" required>
+                        <option value="" disabled selected>Escolha a sua província</option>
+                        <option value="cabo_delgado">Cabo Delgado</option>
+                        <option value="gaza">Gaza</option>
+                        <option value="inhambane">Inhambane</option>
+                        <option value="manica">Manica</option>
+                        <option value="maputo_cidade">Maputo (Cidade)</option>
+                        <option value="maputo_provincia">Maputo (Província)</option>
+                        <option value="nampula">Nampula</option>
+                        <option value="niassa">Niassa</option>
+                        <option value="sofala">Sofala</option>
+                        <option value="tete">Tete</option>
+                        <option value="zambezia">Zambézia</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="localidade">Localidade</label>
+                    <input type="text" id="localidade" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fins">Para que fins?</label>
+                    <input type="text" id="fins" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="linguagem">Linguagem escolhida</label>
+                    <select id="linguagem" required>
+                        <option value="" disabled selected>Selecione a linguagem</option>
+                        <option value="python">Python</option>
+                        <option value="scratch">Scratch</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="java">Java</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">Cadastrar</button>
+            </form>
+        </div>
+
+        <!-- ESTADO 2: MENSAGEM DE SUCESSO -->
+        <div id="sucessoState" style="display: none; text-align: center; animation: fadeIn 0.4s ease;">
+            <div style="font-size: 50px; margin-bottom: 15px;">🚀</div>
+            <h2>Conta criada com sucesso!</h2>
+            <p class="subtitle">Pronto para iniciar a tua jornada no mundo da tecnologia?</p>
+            
+            <!-- Botão com ação de redirecionar para a Rota 3 (Login) -->
+            <button id="btnIrParaLogin" class="btn-cadastrar" style="margin-top: 20px;">
+                Entrar / Login →
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const htmlElement = document.documentElement;
+
+        // Recupera e aplica o tema guardado para manter a consistência visual
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', savedTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        const cadastroForm = document.getElementById('cadastroForm');
+        const cadastroState = document.getElementById('cadastroState');
+        const sucessoState = document.getElementById('sucessoState');
+        const btnIrParaLogin = document.getElementById('btnIrParaLogin');
+
+        cadastroForm.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+            cadastroState.style.display = 'none';
+            sucessoState.style.display = 'block';
+        });
+
+        // Redirecionamento explícito para a Rota 3 da sua aplicação Django
+        btnIrParaLogin.addEventListener('click', () => {
+            window.location.href = '/polls/login/';
+        });
+    </script>
+</body>
+</html>

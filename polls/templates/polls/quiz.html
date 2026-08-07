@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - {{ linguagem.nome }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0d0d1a; font-family: Arial, sans-serif; color: white; padding: 20px 20px 80px 20px; }
+        .header { text-align: center; padding: 20px 0; }
+        .header h1 { color: #a855f7; font-size: 1.5em; }
+        .header p { color: #aaa; font-size: 0.9em; margin-top: 5px; }
+        .back { color: #aaa; text-decoration: none; display: block; margin-bottom: 20px; }
+        .exercicio { background: #1a1a2e; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .exercicio h3 { font-size: 1em; margin-bottom: 15px; color: #fff; }
+        .opcao { display: block; background: #0d0d1a; border: 2px solid #333; border-radius: 10px; padding: 12px 15px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; color: white; width: 100%; text-align: left; font-size: 1em; }
+        .opcao:hover { border-color: #a855f7; background: #1a0a2e; }
+        .opcao.selected { border-color: #a855f7; background: #2d1b4e; }
+        .numero { display: inline-block; background: #a855f7; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 0.8em; margin-right: 10px; }
+        .btn-submit { width: 100%; background: #a855f7; color: white; border: none; padding: 15px; border-radius: 12px; font-size: 1.1em; cursor: pointer; margin-top: 10px; }
+        .btn-submit:hover { background: #9333ea; }
+        .creditos { text-align: center; color: #555; font-size: 0.75em; padding: 10px 0; }
+        input[type="radio"] { display: none; }
+    </style>
+</head>
+<body>
+    <a href="/polls/{{ linguagem.id }}/" class="back">← Voltar</a>
+    <div class="header">
+        <h1>Quiz — {{ linguagem.nome }}</h1>
+        <p>Selecciona a resposta correcta para cada pergunta!</p>
+    </div>
+
+    <form method="POST" action="/polls/{{ linguagem.id }}/resultado/">
+        {% csrf_token %}
+        {% for exercicio in exercicios %}
+        <div class="exercicio">
+            <h3><span class="numero">{{ forloop.counter }}</span>{{ exercicio.enuncaido }}</h3>
+            
+            <label class="opcao" onclick="selectOpcao(this)">
+                <input type="radio" name="resposta_{{ exercicio.id }}" value="A">
+                A — {{ exercicio.opcao_a }}
+            </label>
+            <label class="opcao" onclick="selectOpcao(this)">
+                <input type="radio" name="resposta_{{ exercicio.id }}" value="B">
+                B — {{ exercicio.opcao_b }}
+            </label>
+            <label class="opcao" onclick="selectOpcao(this)">
+                <input type="radio" name="resposta_{{ exercicio.id }}" value="C">
+                C — {{ exercicio.opcao_c }}
+            </label>
+            <label class="opcao" onclick="selectOpcao(this)">
+                <input type="radio" name="resposta_{{ exercicio.id }}" value="D">
+                D — {{ exercicio.opcao_d }}
+            </label>
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn-submit">✅ Verificar Respostas</button>
+    </form>
+
+    <div class="creditos">Desenvolvido por @Клодетт</div>
+
+    <script>
+        function selectOpcao(label) {
+            const exercicio = label.closest('.exercicio');
+            exercicio.querySelectorAll('.opcao').forEach(op => op.classList.remove('selected'));
+            label.classList.add('selected');
+        }
+    </script>
+</body>
+</html>

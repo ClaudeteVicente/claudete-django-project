@@ -1,0 +1,11 @@
+db.sqlite3
+
+my-venv/
+venv/
+
+.env
+
+__pycache__/
+*.py[cod]
+
+.vscode/

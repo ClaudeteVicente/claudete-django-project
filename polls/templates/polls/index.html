@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Crianca Uma Linguagem</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0d0d1a; font-family: Arial, sans-serif; color: white; }
+        
+        .hero { padding: 40px 20px; display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; }
+        .hero-text h1 { font-size: 2.5em; line-height: 1.2; }
+        .hero-text h1 span { color: #a855f7; }
+        .hero-text p { color: #aaa; margin: 15px 0; font-size: 0.95em; line-height: 1.6; }
+        .hero-badge { display: inline-block; border: 1px solid #a855f7; border-radius: 20px; padding: 8px 16px; font-size: 0.85em; color: #a855f7; }
+        .hero-img { font-size: 8em; }
+
+        .linguagens-section { padding: 20px; max-width: 900px; margin: 0 auto; }
+        .linguagens-section h2 { text-align: center; font-size: 1.3em; margin-bottom: 5px; }
+        .linguagens-section p { text-align: center; color: #aaa; margin-bottom: 25px; font-size: 0.9em; }
+
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .card { border-radius: 16px; padding: 20px; display: flex; align-items: flex-start; gap: 15px; text-decoration: none; color: white; transition: transform 0.2s; }
+        .card:hover { transform: scale(1.02); }
+        .card-logo { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8em; background: white; flex-shrink: 0; }
+        .card-info h3 { font-size: 1.1em; margin-bottom: 6px; }
+        .card-info p { font-size: 0.8em; color: rgba(255,255,255,0.8); line-height: 1.4; margin-bottom: 10px; }
+        .card-btn { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 6px 14px; font-size: 0.8em; display: inline-block; }
+
+        .card-python { background: linear-gradient(135deg, #1a3a5c, #2563eb); }
+        .card-java { background: linear-gradient(135deg, #5c1a1a, #dc2626); }
+        .card-javascript { background: linear-gradient(135deg, #5c4a00, #ca8a04); }
+        .card-scratch { background: linear-gradient(135deg, #5c3a00, #ea580c); }
+        .card-default { background: linear-gradient(135deg, #2d1b69, #7c3aed); }
+
+        .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a2e; padding: 12px 0; display: flex; justify-content: space-around; border-top: 1px solid #333; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 0.7em; color: #aaa; gap: 4px; }
+        .nav-item.active { color: #a855f7; }
+        .nav-center { background: #a855f7; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; margin-top: -20px; }
+
+        body { padding-bottom: 80px; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Uma crianca,<br><span>uma linguagem</span></h1>
+            <p>Aprenda programacao de forma simples, divertida e interativa. Escolha sua linguagem e comece sua jornada no mundo da tecnologia!</p>
+            <span class="hero-badge">⭐ Aprenda • Crie • Inove</span>
+        </div>
+        <div class="hero-img">👦🏾</div>
+    </div>
+
+    <div class="linguagens-section">
+        <h2>🚀 Escolha a sua linguagem</h2>
+        <p>Todas as linguagens estao disponiveis para aprender!</p>
+        <div class="grid">
+            {% for linguagem in linguagens %}
+            <a href="/polls/{{ linguagem.id }}/" class="card card-{{ linguagem.nome|lower }}">
+                <div class="card-logo">
+                    {% if linguagem.nome == "Python" %}🐍
+                    {% elif linguagem.nome == "Java" %}☕
+                    {% elif linguagem.nome == "JavaScript" %}🌐
+                    {% elif linguagem.nome == "Scratch" %}🐱
+                    {% else %}💻{% endif %}
+                </div>
+                <div class="card-info">
+                    <h3>{{ linguagem.nome }}</h3>
+                    <p>{{ linguagem.introducao|truncatechars:80 }}</p>
+                    <span class="card-btn">Explorar →</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav class="nav-bottom">
+        <div class="nav-item active">🏠<span>Inicio</span></div>
+        <div class="nav-item">📚<span>Cursos</span></div>
+        <div class="nav-center">🚀</div>
+        <div class="nav-item">📊<span>Progresso</span></div>
+        <div class="nav-item">👤<span>Perfil</span></div>
+    </nav>
+   <div style="text-align:center; color:#555; font-size:0.75em; padding: 10px 0 80px 0;">
+    Desenvolvido por @Клодетт
+</div>
+</body>
+</html>
